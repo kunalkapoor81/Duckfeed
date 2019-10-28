@@ -1,7 +1,10 @@
+#The Lambda function integrates with API gateway and inserts a duck feed record into the Postgres tables hosted on an Amazon RDS instance
+
+
 import psycopg2
 import json
 
-
+#Define a duck feed object
 class DuckFeed(object):
     count = 0
     food = ""
@@ -19,6 +22,7 @@ class DuckFeed(object):
         self.time = time
 
 
+#Define a coonection to the Postgres DB
 def create_conn():
     conn = None
     try:
@@ -34,6 +38,7 @@ def create_conn():
     return conn
 
 
+#This function fetches all the records from the ducks table and displays them on the lambda console log
 def fetch_all(conn):
     query = "select * from ducks"
     result = []
@@ -44,19 +49,19 @@ def fetch_all(conn):
         result.append(line)
     return result
 
-
+#This function inserts a record into the ducks table
 def insert(conn, feed: DuckFeed):
     query = "insert into ducks(feed_date,park, food, food_cat, food_qty,duck_count) values('%s','%s','%s','%s','%d','%d')" % (
          feed.time,feed.location, feed.food, feed.type, feed.quantity,feed.count)
     cursor = conn.cursor()
     cursor.execute(query)
 
-
+#Create a duck feed event
 def feed_from_event(event):
     # return DuckFeed(15, "carrot", "vegetable", "Golden Park", 200, "2019-10-25")
     return DuckFeed(event['count'], event['food'], event['type'], event['location'], event['quantity'], event['time'])
 
-
+#Main
 def lambda_handler(event, context):
     conn = create_conn()
     conn.autocommit = True
