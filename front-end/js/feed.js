@@ -48,19 +48,19 @@ export default class FeedForm extends React.Component {
           <form id="duck-feed-form" onSubmit={this.handleSubmit}>
           <div class="formfield">
             <label htmlFor="time">When did you feed? </label>
-            <Datetime id="time" name="time" onChange={this.handleDate} /><br/><br/>
+            <Datetime id="time" name="time" onChange={this.handleDate} required/><br/><br/>
           </div>
           <div class="formfield">
             <label htmlFor="location"> Where did you feed? </label>
-            <input id="location" name="location" type="text" /><br/><br/>
+            <input id="location" name="location" type="text" required/><br/><br/>
           </div>
           <div class="formfield">
             <label htmlFor="count">How many Ducks did you feed? </label>
-            <input id="count" name="count" type="text" /><br/><br/>
+            <input id="count" name="count" type="text" required/><br/><br/>
           </div>
           <div class="formfield">
             <label htmlFor="food">What Food did you feed? </label>
-            <input id="food" name="food" type="text" /><br/><br/>
+            <input id="food" name="food" type="text" required/><br/><br/>
           </div>
           <div class="formfield">
             <label htmlFor="type">What Food type was the food?  </label>
@@ -73,7 +73,7 @@ export default class FeedForm extends React.Component {
           </div>
           <div class="formfield">
             <label htmlFor="quantity">How Much Food in Grams did you feed? </label>
-            <input id="quantity" name="quantity" type="text" /><br/><br/>
+            <input id="quantity" name="quantity" type="text" required/><br/><br/>
           </div>
           <div class="formfield">
              <label htmlFor="quantity">Set this as your recurring feed? </label>
